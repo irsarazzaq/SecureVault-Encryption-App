@@ -1,0 +1,9 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="SecureVault.csproj" Id="937307b0-5bd3-4c69-870d-481d7ddeb2ca">
+    <Platform Solution="*|x64" Project="x64" />
+  </Project>
+</Solution>
