@@ -1,6 +1,4 @@
-Here is the updated documentation for **SecureVault**, modified to reflect your migration to **.NET 6.0**, the cross-platform nature of the project, and the specific Docker multi-stage build strategy you implemented.
 
----
 
 # 🔐 SecureVault – Modern .NET 6.0 Encryption & Decryption System
 
