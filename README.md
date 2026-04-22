@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-SecureVault is a console-based application developed in C# that allows users to securely encrypt and decrypt files using multiple cryptographic algorithms. The project demonstrates strong implementation of Object-Oriented Programming (OOP) concepts along with file handling, error handling, and containerization using Docker.
+SecureVault is a console-based application developed in C# that allows users to securely encrypt and decrypt files using multiple cryptographic algorithms. The project demonstrates strong implementation of Object-Oriented Programming (OOP) concepts along with file handling, error handling, and containerization using Docker. SecureVault is a modern cryptographic utility developed using C# and .NET 6.0 that provides secure end-to-end data encryption. The application is fully containerized using Docker to ensure seamless deployment and portability across different distributed environments
 
 ---
 
