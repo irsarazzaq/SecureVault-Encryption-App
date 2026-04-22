@@ -113,5 +113,5 @@ Figure 5: Docker Output
 ---
 
 **Author:** Irsa Maryam
-**Course:** Parallel & Distributed Computing (Lab)
+**Course:** Visual Programming (Lab)
 **Date:** April 2026
