@@ -88,10 +88,20 @@ ENTRYPOINT ["dotnet", "SecureVault.dll"]
 ### 🖥️ Windows Interface
 On Windows, the application successfully triggers native dialogs for file selection.
 *(Insert Screenshot: VS Main Menu / File Explorer)*
+<img width="430" height="256" alt="image (1)" src="https://github.com/user-attachments/assets/609b725b-d16d-4e68-9a34-5bccd210639a" />
+Figure1: SecureVaultMainInterfaceonWindows
+<img width="435" height="216" alt="image (2)" src="https://github.com/user-attachments/assets/878f00d5-3bd9-4499-8fc3-af095cf01ef3" />
+Figure2:Encryption/DecryptionAlgorithms
+<img width="426" height="250" alt="image (3)" src="https://github.com/user-attachments/assets/2f433a51-836c-4812-a21f-90fe4daa1328" />
+Figure3:Fileselection
 
 ### 🐳 Docker Deployment
 The containerized application shows active status in Docker Desktop.
 *(Insert Screenshot: Docker Build Terminal)*
+<img width="494" height="251" alt="image (4)" src="https://github.com/user-attachments/assets/8e8d0dc8-8cb4-4a89-bda5-40a81f69b772" />
+Figure 4: Docker Container
+<img width="496" height="277" alt="image (5)" src="https://github.com/user-attachments/assets/bfd04716-b2ab-4540-a87d-ad3c38b90ed5" />
+Figure 5: Docker Output
 
 ---
 
