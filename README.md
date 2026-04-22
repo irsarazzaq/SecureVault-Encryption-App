@@ -1,195 +1,109 @@
-# 🔐 SecureVault – C# Console-Based Encryption & Decryption System
+Here is the updated documentation for **SecureVault**, modified to reflect your migration to **.NET 6.0**, the cross-platform nature of the project, and the specific Docker multi-stage build strategy you implemented.
+
+---
+
+# 🔐 SecureVault – Modern .NET 6.0 Encryption & Decryption System
 
 ## 📌 Overview
-
-SecureVault is a console-based application developed in C# that allows users to securely encrypt and decrypt files using multiple cryptographic algorithms. The project demonstrates strong implementation of Object-Oriented Programming (OOP) concepts along with file handling, error handling, and containerization using Docker. SecureVault is a modern cryptographic utility developed using C# and .NET 6.0 that provides secure end-to-end data encryption. The application is fully containerized using Docker to ensure seamless deployment and portability across different distributed environments
+SecureVault is a robust cryptographic utility developed using **C#** and the modern **.NET 6.0** framework. It provides secure end-to-end data encryption while bridging the gap between legacy desktop utilities and modern distributed environments. The application is fully containerized using **Docker** to ensure seamless deployment and portability across different platforms.
 
 ---
 
 ## 🎯 Features
-
-* 🔒 Multiple encryption & decryption algorithms
-* 📂 Supports text and media files
-* 🧠 Strong OOP implementation (Abstraction, Inheritance, Polymorphism, Encapsulation)
-* 🧾 Flat file database for storing history
-* ⚠️ Exception handling for safe execution
-* 🖥️ Clean and interactive console UI
-* 📦 Docker support for containerized execution
+* 🔒 **Industrial-Grade Cryptography:** Supports multiple high-speed symmetric and asymmetric algorithms.
+* 📂 **Universal Support:** Designed to handle various file types and metadata.
+* 🧠 **Modular OOP Architecture:** Clean separation of concerns using Abstraction and Interfaces (`ICipher.cs`).
+* 🧾 **Persistence Layer:** Lightweight flat-file database system for logging encryption history (`history.txt`).
+* 🖥️ **Adaptive UI:** Supports Windows Native File Explorer via `FileDialogHelper.cs` and console-based input for Linux/Docker.
+* 📦 **Multi-Stage Dockerization:** Optimized for small image sizes and high-availability deployment.
 
 ---
 
 ## 🛠️ Technologies Used
-
-* **Language:** C#
-* **Framework:** .NET Framework 4.7.2
-* **IDE:** Visual Studio
-* **Database:** Flat File System
-* **Containerization:** Docker Desktop (Windows Containers)
-* **OS Support:** Windows
+* **Language:** C# 10
+* **Framework:** .NET 6.0 (Migrated from legacy .NET Framework 4.7.2)
+* **IDE:** Visual Studio 2022 / 2026 Community
+* **Database:** Flat File System (Local Persistence)
+* **Containerization:** Docker Desktop
 
 ---
 
 ## 🔐 Encryption Algorithms Implemented
-
-The application includes the following algorithms:
-
-1. Caesar Cipher
-2. Vigenère Cipher
-3. Base64 Encoding
-4. AES (Advanced Encryption Standard)
-5. RSA (Rivest–Shamir–Adleman)
-6. DES (Data Encryption Standard)
+The application includes a wide range of algorithms for educational and practical use:
+1. **AES (Advanced Encryption Standard):** High-speed symmetric encryption.
+2. **RSA (Rivest–Shamir–Adleman):** Asymmetric public/private key logic.
+3. **DES (Data Encryption Standard):** Legacy block cipher.
+4. **Base64 Encoding:** Binary-to-text representation.
+5. **Caesar & Vigenère Ciphers:** Classic cryptographic examples.
 
 ---
 
 ## 🧱 Project Structure
-
-```
+```text
 SecureVault/
-│
 ├── Program.cs
 ├── DatabaseService.cs
 ├── FileDialogHelper.cs
-│
 ├── Core/
-│   ├── ICipher.cs
-│   ├── CipherBase.cs
-│
+│   ├── ICipher.cs (Interface)
+│   └── CipherBase.cs (Abstract Base)
 ├── Algorithms/
-│   ├── CaesarCipher.cs
-│   ├── VigenereCipher.cs
-│   ├── Base64Cipher.cs
 │   ├── AesCipher.cs
 │   ├── RsaCipher.cs
 │   ├── DesCipher.cs
-│
-├── bin/
-├── obj/
-└── Dockerfile
+│   └── ... (Legacy Ciphers)
+└── Dockerfile (Multi-stage build)
 ```
 
----
-
-## ▶️ How to Run (Without Docker)
-
-1. Open project in **Visual Studio**
-2. Build the solution:
-
-   ```
-   Build → Build Solution
-   ```
-3. Run the application:
-
-   ```
-   Ctrl + F5
-   ```
-4. Follow on-screen console instructions:
-
-   * Select Encrypt/Decrypt
-   * Choose algorithm
-   * Enter key (if required)
-   * Select file
-   * Save output
 
 ---
 
-## 🐳 How to Run with Docker
+## 🐳 Docker Strategy & Deployment
+SecureVault uses a **Multi-Stage Build** to ensure the production image is lightweight and contains only the necessary runtime.
 
-### 🔹 Prerequisites
-
-* Docker Desktop installed
-* Windows Containers enabled
-
----
-
-### 🔹 Step 1: Create Dockerfile
-
-Ensure the following Dockerfile exists in the root directory:
-
+### 🔹 Step 1: The Dockerfile
 ```dockerfile
-FROM mcr.microsoft.com/dotnet/framework/runtime:4.8
-WORKDIR /app
+# Stage 1: Build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
 COPY . .
-CMD ["SecureVault.exe"]
+RUN dotnet publish "SecureVault.csproj" -c Release -o /app/publish
+
+# Stage 2: Runtime
+FROM mcr.microsoft.com/dotnet/runtime:6.0
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "SecureVault.dll"]
 ```
 
----
-
-### 🔹 Step 2: Build Docker Image
-
-Open terminal in project directory and run:
-
-```bash
-docker build -t securevault .
-```
+### 🔹 Step 2: Build & Run
+1. Open a terminal in the project directory.
+2. Build the image:
+   `docker build -t secure-vault .`
+3. Run the interactive container:
+   `docker run -it secure-vault`
 
 ---
 
-### 🔹 Step 3: Run Container
+## 🖼️ Visual Outputs
 
-```bash
-docker run -it securevault
-```
+### 🖥️ Windows Interface
+On Windows, the application successfully triggers native dialogs for file selection.
+*(Insert Screenshot: VS Main Menu / File Explorer)*
 
----
-
-### ⚠️ Note
-
-File dialog (OpenFileDialog) does not work inside Docker containers.
-Use manual file path input when running in Docker.
+### 🐳 Docker Deployment
+The containerized application shows active status in Docker Desktop.
+*(Insert Screenshot: Docker Build Terminal)*
 
 ---
 
-## 💾 Data Storage
-
-* The application uses a **flat file database** to store:
-
-  * Operation type (Encrypt/Decrypt)
-  * Algorithm used
-  * File path
-  * Timestamp
+## 🎓 Technical Challenges Overcome
+* **Framework Migration:** Successfully migrated logic from .NET 4.7.2 to .NET 6.0 to allow cross-platform compatibility.
+* **Conditional Compilation:** Used `#if WINDOWS` directives to handle GUI-specific code that cannot run in headless Docker environments.
+* **Path Management:** Resolved "Access Denied" errors and drive migration issues (C: to E:) by clearing build artifacts and resetting permissions.
 
 ---
 
-## ⚠️ Exception Handling
-
-* Handles invalid inputs
-* Prevents crashes during file operations
-* Ensures smooth execution with user-friendly messages
-
----
-
-## 🎓 Learning Outcomes
-
-This project demonstrates:
-
-* Practical implementation of **OOP principles**
-* Working with **file systems in C#**
-* Implementation of **multiple encryption techniques**
-* Use of **Docker for application deployment**
-* Building structured and scalable console applications
-
----
-
-## 🚀 Future Improvements
-
-* GUI version (Windows Forms / WPF)
-* Cloud storage integration
-* Stronger encryption standards
-* User authentication system
-* Real database integration (SQL Server)
-
----
-
-## 👩‍💻 Author
-
-**Irsa Maryam**
-BS Computer Science Student
-
----
-
-## 📄 License
-
-This project is developed for academic purposes and learning.
-
----
+**Author:** Irsa Maryam
+**Course:** Parallel & Distributed Computing (Lab)
+**Date:** April 2026
